@@ -9,19 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Service
 public class WorkerService {
 
     private final WorkerRepository workerRepository;
-
-    public void validationPesel(String pesel) {
-
-        if (pesel.length() != 11) {
-            throw new IllegalArgumentException("Get true length PESEL ");
-        }
-    }
 
     @Autowired
     public WorkerService(WorkerRepository workerRepository) {
