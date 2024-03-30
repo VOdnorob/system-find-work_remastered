@@ -34,6 +34,13 @@ public class WorkerService {
     public Worker createWorker(Worker worker)
     {
 
+        workerRepository.findByEmail(worker.getEmail())
+                .ifPresent(w -> {
+                    throw new ResponseStatusException(
+                            HttpStatus.BAD_REQUEST,
+                            "Worker with " + worker.getEmail() + " already registered"
+                    );
+                });
         return workerRepository.save(worker);
     }
 
