@@ -1,7 +1,7 @@
 package com.diploma.projectDiploma.services;
 
 
-import com.diploma.projectDiploma.doMain.Worker;
+import com.diploma.projectDiploma.entity.Worker;
 import com.diploma.projectDiploma.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,19 +15,19 @@ import java.util.regex.Pattern;
 public class WorkerService {
 
     private final WorkerRepository workerRepository;
-    private static final String EMAIL_REGEX = "^(.+)@(.+)$";
+    private static final String EMAIL_REGEX = ".+@.+\\..+";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
-    public void validateEmail(String email){
+    public void validateEmail(String email) {
         if (!EMAIL_PATTERN.matcher(email).matches()) {
             throw new IllegalArgumentException("Bad format registered email");
         }
     }
 
-    public void validationPesel(int pesel){
-        String peselInString = Integer.toString(pesel);
-        if (peselInString.length() != 1){
-        throw new IllegalArgumentException("Get true length PESEL ");
+    public void validationPesel(String pesel) {
+
+        if (pesel.length() != 11) {
+            throw new IllegalArgumentException("Get true length PESEL ");
         }
     }
 
@@ -37,10 +37,10 @@ public class WorkerService {
     }
 
 
-    public Worker createWorker(Worker worker)  {
-        validateEmail(worker.getEmail());
-
-        validationPesel(worker.getPESEL());
+    public Worker createWorker(Worker worker)
+    {
+       // validateEmail(worker.getEmail());
+         validationPesel(worker.getPesel());
 
         workerRepository.findByEmail(worker.getEmail())
                 .ifPresent(w -> {

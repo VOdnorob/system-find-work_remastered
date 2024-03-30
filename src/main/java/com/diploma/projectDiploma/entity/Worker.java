@@ -1,10 +1,10 @@
-package com.diploma.projectDiploma.doMain;
+package com.diploma.projectDiploma.entity;
 
 import lombok.Data;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 
 @Data
 @Document(collection = "Workers")
@@ -14,8 +14,7 @@ public class Worker {
     private String id;
 
     @NotEmpty
-    @Pattern(regexp = "^[A-Za-z]+$", message = "Only liters")
-    @Size(min = 2, message = "min 3 letters")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Only alphabetic characters")
     private String name;
 
     @NotEmpty
@@ -27,29 +26,27 @@ public class Worker {
     private String email;
 
     @NotEmpty
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%&!^*]).{8,20}$", message = "bed password")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",
+            message = "password should contains one lower case, one upper case, special symbol and one number" )
     private String pass;
 
     @Min(value = 0, message = "Text reality age")
     private int age;
 
-    @Size(max = 11, message = "text right number of phone")
+    @NotEmpty
     private String phoneNumber;
 
     @NotEmpty
     private String nationality;
 
-    @NotEmpty
     private String city;
 
-    @NotEmpty
     private String street;
 
-    @NotEmpty
     private String houseNumber;
 
     @NotEmpty
-    @Size(min = 9, max = 9)
-    private int PESEL;
+    @Size(min = 11, max = 11)
+    private String pesel;
 
 }

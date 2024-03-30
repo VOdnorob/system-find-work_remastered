@@ -1,13 +1,12 @@
 package com.diploma.projectDiploma.controllers;
 
-import com.diploma.projectDiploma.doMain.Worker;
+import com.diploma.projectDiploma.entity.Worker;
 import com.diploma.projectDiploma.services.WorkerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,7 +21,7 @@ public class WorkerController {
     }
 
     @PostMapping("/createWorker")
-    public Worker createWorker( @RequestBody Worker worker) {
+    public Worker createWorker(@Valid @RequestBody Worker worker) {
 
         return workerService.createWorker(worker);
     }

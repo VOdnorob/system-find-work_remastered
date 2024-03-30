@@ -1,6 +1,6 @@
 package com.diploma.projectDiploma.repository;
 
-import com.diploma.projectDiploma.doMain.Worker;
+import com.diploma.projectDiploma.entity.Worker;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface WorkerRepository extends MongoRepository<Worker, String> {
     Optional<Worker> findByEmail(String email);
 
-    Optional<Worker> findByPESEL(int PESEL);
+    Optional<Worker> findByPesel(String pesel);
 
     List<Worker> findByName(String name);
 
