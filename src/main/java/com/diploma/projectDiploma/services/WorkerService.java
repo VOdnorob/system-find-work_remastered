@@ -3,9 +3,6 @@ package com.diploma.projectDiploma.services;
 
 import com.diploma.projectDiploma.doMain.Worker;
 import com.diploma.projectDiploma.repository.WorkerRepository;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,8 +14,6 @@ import java.util.regex.Pattern;
 @Service
 public class WorkerService {
 
-    ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-    Validator validator = validatorFactory.getValidator();
     private final WorkerRepository workerRepository;
     private static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
