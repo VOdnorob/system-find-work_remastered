@@ -15,8 +15,6 @@ import java.util.regex.Pattern;
 public class WorkerService {
 
     private final WorkerRepository workerRepository;
-    private static final String EMAIL_REGEX = ".+@.+\\..+";
-    private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
     public void validationPesel(String pesel) {
 
