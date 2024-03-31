@@ -39,7 +39,6 @@ public class Worker {
     @NotEmpty
     private String nationality;
 
-
     private String city;
 
     private String street;
