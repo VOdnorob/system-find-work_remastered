@@ -39,7 +39,7 @@ public class Worker {
     @NotEmpty
     private String nationality;
 
-    @NotEmpty
+
     private String city;
 
     private String street;
