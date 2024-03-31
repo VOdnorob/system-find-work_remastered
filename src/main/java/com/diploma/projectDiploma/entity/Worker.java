@@ -8,7 +8,7 @@ import jakarta.validation.constraints.*;
 
 @Data
 @Document(collection = "Workers")
-public class Worker {
+public class    Worker {
 
     @Id
     private String id;
