@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/workers")
 public class WorkerController {
@@ -21,9 +20,9 @@ public class WorkerController {
         this.workerService = workerService;
     }
 
+
     @PostMapping("/createWorker")
     public Worker createWorker(@Valid @RequestBody Worker worker) {
-
         return workerService.createWorker(worker);
     }
 
