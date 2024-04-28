@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface WorkerRepository extends MongoRepository<Worker, String> {
+
     Optional<Worker> findByEmail(String email);
 
     Optional<Worker> findByPesel(String pesel);

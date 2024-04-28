@@ -5,9 +5,11 @@ import com.diploma.projectDiploma.services.WorkerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/workers")
@@ -26,6 +28,7 @@ public class WorkerController {
         return workerService.createWorker(worker);
     }
 
+    @PreAuthorize("hasAuthority('WORKER')")
     @GetMapping("/findWorker")
     public List<Worker> getAllWorkers() {
         return workerService.findAllWorkers();

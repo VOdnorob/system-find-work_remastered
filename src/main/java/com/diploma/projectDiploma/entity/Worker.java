@@ -6,9 +6,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.*;
 
+import java.util.Set;
+
 @Data
 @Document(collection = "Workers")
-public class    Worker {
+public class Worker {
 
     @Id
     private String id;
@@ -25,10 +27,10 @@ public class    Worker {
     @Email(regexp = ".+@.+\\..+", message = "Write true email")
     private String email;
 
-    @NotEmpty
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",
-            message = "password should contains one lower case, one upper case, special symbol and one number" )
-    private String pass;
+    @NotEmpty(message = "Password cannot be empty")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "Password should contains one lower case, one upper case, special symbol and one number")
+    private String password;
 
     @Min(value = 0, message = "Text reality age")
     private int age;
@@ -44,6 +46,8 @@ public class    Worker {
     private String street;
 
     private String houseNumber;
+
+    private Set<String>  roles;
 
     @NotEmpty
     @Size(min = 11, max = 11)
