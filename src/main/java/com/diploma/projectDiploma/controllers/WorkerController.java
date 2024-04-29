@@ -22,16 +22,19 @@ public class WorkerController {
         this.workerService = workerService;
     }
 
-
     @PostMapping("/createWorker")
     public Worker createWorker(@Valid @RequestBody Worker worker) {
         return workerService.createWorker(worker);
     }
 
-    @PreAuthorize("hasAuthority('WORKER')")
+    @PreAuthorize("hasRole('ROLE_EMPLOYER')")
     @GetMapping("/findWorker")
     public List<Worker> getAllWorkers() {
         return workerService.findAllWorkers();
     }
 
+
 }
+
+
+

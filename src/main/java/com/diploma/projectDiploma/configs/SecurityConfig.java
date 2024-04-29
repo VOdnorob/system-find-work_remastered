@@ -13,8 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -26,13 +24,25 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize
+                .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/welcome/**", "/workers/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(withDefaults());
+                .formLogin(form -> form
+                        .permitAll() // Дозволити всім доступ до форми входу
+                        .defaultSuccessUrl("/welcome/logged", true) // Куди перенаправляти після успішного входу
+                        .failureUrl("/login?error=true") // Куди перенаправляти при помилці входу
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/welcome/hello")
+                        .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                );
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
