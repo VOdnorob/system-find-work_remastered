@@ -9,7 +9,7 @@ import jakarta.validation.constraints.*;
 import java.util.Set;
 
 @Data
-@Document(collection = "Workers")
+@Document(collection = "Worker")
 public class Worker {
 
     @Id
@@ -28,7 +28,7 @@ public class Worker {
     private String email;
 
     @NotEmpty(message = "Password cannot be empty")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#@$!%*?&])[A-Za-z\\d#@$!%*?&]{8,}$",
             message = "Password should contains one lower case, one upper case, special symbol and one number")
     private String password;
 

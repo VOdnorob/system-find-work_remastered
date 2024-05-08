@@ -6,7 +6,7 @@ function CreateWorkerForm() {
         name: '',
         surname: '',
         email: '',
-        pass: '',
+        password: '',
         age: '',
         phoneNumber: '',
         nationality: '',
@@ -38,7 +38,7 @@ function CreateWorkerForm() {
                 name: '',
                 surname: '',
                 email: '',
-                pass: '',
+                password: '',
                 age: '',
                 phoneNumber: '',
                 nationality: '',
@@ -62,12 +62,12 @@ function CreateWorkerForm() {
     return (
         <div>
             <h2>Create Worker</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{ color: 'blueviolet' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <input type="text" name="name" value={worker.name} onChange={handleChange} placeholder="Name" required />
                 <input type="text" name="surname" value={worker.surname} onChange={handleChange} placeholder="Surname" required />
                 <input type="email" name="email" value={worker.email} onChange={handleChange} placeholder="Email" required />
-                <input type="password" name="pass" value={worker.pass} onChange={handleChange} placeholder="Password" required />
+                <input type="password" name="password" value={worker.password} onChange={handleChange} placeholder="Password" required />
                 <input type="text" name="age" value={worker.age} onChange={handleChange} placeholder="Age" required />
                 <input type="text" name="phoneNumber" value={worker.phoneNumber} onChange={handleChange} placeholder="Phone Number" required />
                 <input type="text" name="nationality" value={worker.nationality} onChange={handleChange} placeholder="Nationality" required />

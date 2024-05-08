@@ -22,6 +22,12 @@ public class WorkerService implements UserDetailsService {
     private final WorkerRepository workerRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
+    public WorkerService(WorkerRepository workerRepository, PasswordEncoder passwordEncoder ) {
+        this.workerRepository = workerRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -33,14 +39,8 @@ public class WorkerService implements UserDetailsService {
                         .collect(Collectors.toList()));
     }
 
-    @Autowired
-    public WorkerService(WorkerRepository workerRepository, PasswordEncoder passwordEncoder) {
-        this.workerRepository = workerRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
-
-    public Worker createWorker(Worker worker) {
+    public void createWorker(Worker worker) {
         workerRepository.findByEmail(worker.getEmail())
                 .ifPresent(w -> {
                     throw new ResponseStatusException(
@@ -56,7 +56,7 @@ public class WorkerService implements UserDetailsService {
                     );
                 });
         worker.setPassword(passwordEncoder.encode(worker.getPassword()));
-        return workerRepository.save(worker);
+        workerRepository.save(worker);
     }
 
     public List<Worker> findAllWorkers() {
