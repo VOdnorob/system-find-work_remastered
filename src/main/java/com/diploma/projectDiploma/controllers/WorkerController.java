@@ -1,7 +1,7 @@
 package com.diploma.projectDiploma.controllers;
 
 import com.diploma.projectDiploma.entity.Worker;
-import com.diploma.projectDiploma.services.EmailService;
+import com.diploma.projectDiploma.services.EmailSender;
 import com.diploma.projectDiploma.services.WorkerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +17,19 @@ import java.util.List;
 public class WorkerController {
 
     private final WorkerService workerService;
-    private final EmailService emailService;
+    private final EmailSender emailSender;
 
     @Autowired
-    public WorkerController(WorkerService workerService, EmailService emailService) {
+    public WorkerController(WorkerService workerService, EmailSender emailSender) {
         this.workerService = workerService;
-        this.emailService = emailService;
+        this.emailSender = emailSender;
     }
 
     @CrossOrigin
     @PostMapping("/createWorker")
     public HttpStatus createWorker(@Valid @RequestBody Worker worker) {
         workerService.createWorker(worker);
-        emailService.sendEmail(worker.getEmail(), "Registration", "Hello, you are successfully registered in our service");
+        emailSender.sendEmail(worker.getEmail(), "Registration", "Hello, you are successfully registered in our service");
         return HttpStatus.CREATED;
     }
 

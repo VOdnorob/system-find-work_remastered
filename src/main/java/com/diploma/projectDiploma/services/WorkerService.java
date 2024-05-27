@@ -2,6 +2,7 @@ package com.diploma.projectDiploma.services;
 
 
 import com.diploma.projectDiploma.entity.Worker;
+import com.diploma.projectDiploma.repository.VacancyRepository;
 import com.diploma.projectDiploma.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +22,13 @@ public class WorkerService implements UserDetailsService {
 
     private final WorkerRepository workerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final VacancyRepository vacancyRepository;
 
     @Autowired
-    public WorkerService(WorkerRepository workerRepository, PasswordEncoder passwordEncoder ) {
+    public WorkerService(WorkerRepository workerRepository, PasswordEncoder passwordEncoder, VacancyRepository vacancyRepository) {
         this.workerRepository = workerRepository;
         this.passwordEncoder = passwordEncoder;
+        this.vacancyRepository = vacancyRepository;
     }
 
 
