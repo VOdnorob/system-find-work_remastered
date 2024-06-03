@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Document("Vacancy")
@@ -23,7 +24,7 @@ public class Vacancy {
     @NotEmpty
     private String description;
 
-    private List<String> candidateIds;
+    private Set<String> candidateIds;
 
     private boolean isAccepted = false;
 

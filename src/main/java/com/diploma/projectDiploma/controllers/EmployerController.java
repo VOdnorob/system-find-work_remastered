@@ -2,18 +2,15 @@ package com.diploma.projectDiploma.controllers;
 
 
 import com.diploma.projectDiploma.entity.Vacancy;
-import com.diploma.projectDiploma.services.EmployerService;
 import com.diploma.projectDiploma.services.VacancyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/employer")
+@RequestMapping("/api/employers")
 public class EmployerController {
 
 
@@ -25,8 +22,9 @@ public class EmployerController {
     }
 
     @PreAuthorize("hasRole('ROLE_EMPLOYER')")
+    @CrossOrigin
     @PostMapping("/createVacancy")
-    public HttpStatus createVacancy(@RequestBody Vacancy vacancy) {
+    public HttpStatus createVacancy(@Valid @RequestBody Vacancy vacancy) {
         vacancyService.addVacancy(vacancy);
         return HttpStatus.CREATED;
     }

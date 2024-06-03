@@ -66,5 +66,14 @@ public class WorkerService implements UserDetailsService {
         return workerRepository.findAll();
     }
 
+    public Worker findWorkerById(String workerId) {
+        return workerRepository.findById(workerId).orElse(null);
+    }
+
+    public Worker findByEmail(String email) {
+        return workerRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    }
+
 
 }

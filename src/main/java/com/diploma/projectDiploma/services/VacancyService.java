@@ -7,7 +7,10 @@ import com.diploma.projectDiploma.repository.VacancyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 @Service
 public class VacancyService {
@@ -23,8 +26,24 @@ public class VacancyService {
         vacancyRepository.save(vacancy);
     }
 
-    public void acceptVacancyFromWorker(Vacancy vacancy, Worker worker) {
-        vacancy.setCandidateIds(Collections.singletonList(worker.getId()));
+    public List<Vacancy> getAllVacancies() {
+      return vacancyRepository.findAll();
     }
+
+    public Vacancy findVacancyById(String id) {
+        return vacancyRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Vacancy not found"));
+    }
+
+    public void acceptVacancyFromWorker(Vacancy vacancy, Worker worker) {
+        Set<String> candidateIds = vacancy.getCandidateIds();
+        if (candidateIds == null) {
+            candidateIds = new HashSet<>();
+        }
+        candidateIds.add(worker.getId());
+        vacancy.setCandidateIds(candidateIds);
+        vacancyRepository.save(vacancy);
+    }
+
 
 }

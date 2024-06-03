@@ -14,7 +14,7 @@ public interface WorkerRepository extends MongoRepository<Worker, String> {
 
     Optional<Worker> findByPesel(String pesel);
 
-    List<Worker> findByName(String name);
+    Optional<Worker> findByName(String name);
 
     List<Worker> findByCity (String city);
 
