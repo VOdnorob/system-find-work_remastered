@@ -16,10 +16,12 @@ import java.util.Set;
 public class VacancyService {
 
     private final VacancyRepository vacancyRepository;
+    private final WorkerService workerService;
 
     @Autowired
-    public VacancyService(VacancyRepository vacancyRepository) {
+    public VacancyService(VacancyRepository vacancyRepository, WorkerService workerService) {
         this.vacancyRepository = vacancyRepository;
+        this.workerService = workerService;
     }
 
     public void addVacancy(Vacancy vacancy) {
@@ -33,6 +35,15 @@ public class VacancyService {
     public Vacancy findVacancyById(String id) {
         return vacancyRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Vacancy not found"));
+    }
+
+    public void acceptVacancyFromEmployer(String vacancyId, String workerId) {
+        workerService.checkIfWorkerExists(workerId);
+        Vacancy vacancy = findVacancyById(vacancyId);
+        vacancy.setAccepted(true);
+        vacancy.setWorkerId(workerId);
+        vacancy.getCandidateIds().clear();
+        vacancyRepository.save(vacancy);
     }
 
     public void acceptVacancyFromWorker(Vacancy vacancy, Worker worker) {

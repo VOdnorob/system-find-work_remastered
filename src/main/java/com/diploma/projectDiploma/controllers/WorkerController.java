@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/workers")
+@PreAuthorize("hasRole('ROLE_WORKER')")
 public class WorkerController {
 
     private final WorkerService workerService;
