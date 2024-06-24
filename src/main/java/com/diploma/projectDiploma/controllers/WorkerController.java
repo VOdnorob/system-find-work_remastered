@@ -22,30 +22,21 @@ import java.util.List;
 public class WorkerController {
 
     private final WorkerService workerService;
-    private final EmailSender emailSender;
     private final VacancyService vacancyService;
 
     @Autowired
-    public WorkerController(WorkerService workerService, EmailSender emailSender, VacancyService vacancyService) {
+    public WorkerController(WorkerService workerService, VacancyService vacancyService) {
         this.workerService = workerService;
-        this.emailSender = emailSender;
         this.vacancyService = vacancyService;
     }
 
-    @CrossOrigin
-    @PostMapping("/createWorker")
-    public HttpStatus createWorker(@Valid @RequestBody Worker worker) {
-        workerService.createWorker(worker);
-        emailSender.sendEmail(worker.getEmail(), "Registration", "Hello, you are successfully registered in our service");
-        return HttpStatus.CREATED;
-    }
 
     @CrossOrigin
     @PreAuthorize("hasRole('ROLE_WORKER')")
     @PutMapping("/acceptVacancy")
     public HttpStatus acceptVacancy(@RequestParam String vacancyID, Principal principal) {
         Worker worker = workerService.findByEmail(principal.getName());
-        Vacancy vacancy= vacancyService.findVacancyById(vacancyID);
+        Vacancy vacancy = vacancyService.findVacancyById(vacancyID);
         vacancyService.acceptVacancyFromWorker(vacancy, worker);
         return HttpStatus.ACCEPTED;
     }
@@ -53,7 +44,7 @@ public class WorkerController {
 
     @GetMapping("/findAllVacancy")
     public List<Vacancy> findVacancyByID() {
-       return vacancyService.getAllVacancies();
+        return vacancyService.getAllVacancies();
     }
 
     @GetMapping("/findVacancyById")

@@ -26,7 +26,6 @@ public class EmployerController {
     }
 
 
-
     @PostMapping("/vacancy")
     public HttpStatus createVacancy(@Valid @RequestBody Vacancy vacancy) {
         vacancyService.addVacancy(vacancy);

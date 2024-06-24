@@ -18,6 +18,8 @@ public class Vacancy {
 
     private String workerId;
 
+    private String nameCompany;
+
     @NotEmpty
     private String title;
 

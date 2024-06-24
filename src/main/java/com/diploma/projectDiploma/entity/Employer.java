@@ -16,4 +16,10 @@ public class Employer {
 
     private String phone;
 
+    private String nameOfCompany;
+
+    private String address;
+
+    private String password;
+
 }
