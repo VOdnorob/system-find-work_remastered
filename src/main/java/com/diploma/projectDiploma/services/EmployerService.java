@@ -2,13 +2,11 @@ package com.diploma.projectDiploma.services;
 
 
 import com.diploma.projectDiploma.entity.Employer;
-import com.diploma.projectDiploma.entity.Worker;
 import com.diploma.projectDiploma.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 
@@ -24,7 +22,7 @@ public class EmployerService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void createWorker(Employer employer) {
+    public void createEmployer(Employer employer) {
         employerRepository.findByEmail(employer.getEmail())
                 .ifPresent(w -> {
                     throw new ResponseStatusException(

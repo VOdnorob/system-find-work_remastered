@@ -38,7 +38,7 @@ public class CreateUserController {
 
     @PostMapping("/createEmployer")
     public HttpStatus createEmployer(@Valid @RequestBody Employer employer) {
-        employerService.createWorker(employer);
+        employerService.createEmployer(employer);
         emailSender.sendEmail(employer.getEmail(), "Registration", "Hello, you are successfully registered in our service");
         return HttpStatus.CREATED;
     }
