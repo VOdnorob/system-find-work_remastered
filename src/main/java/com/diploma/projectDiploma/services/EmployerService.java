@@ -35,7 +35,7 @@ public class EmployerService implements UserDetailsService {
                 .ifPresent(w -> {
                     throw new ResponseStatusException(
                             HttpStatus.BAD_REQUEST,
-                            "Worker with " + employer.getEmail() + " already registered"
+                            "Employer with " + employer.getEmail() + " already registered"
                     );
                 });
         employer.setRoles(Collections.singleton("ROLE_EMPLOYER"));
