@@ -1,21 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import WorkerRegistration from './components/WorkerRegistration';
-import EmployerRegistration from './components/EmployerRegistration';
-import ManageVacancies from './components/ManageVacancies';
-import ViewWorkers from './components/ViewWorkers';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CreateWorker from './pages/CreateWorker';
+import CreateEmployer from './pages/CreateEmployer';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
     return (
         <Router>
-            <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/worker-registration" component={WorkerRegistration} />
-                <Route path="/employer-registration" component={EmployerRegistration} />
-                <Route path="/manage-vacancies" component={ManageVacancies} />
-                <Route path="/view-workers" component={ViewWorkers} />
-            </Switch>
+            <div className="App">
+                <Header />
+                <Routes>
+                    <Route path="/createWorker" element={<CreateWorker />} />
+                    <Route path="/createEmployer" element={<CreateEmployer />} />
+                    {/* інші маршрути */}
+                </Routes>
+                <Footer />
+            </div>
         </Router>
     );
 }
