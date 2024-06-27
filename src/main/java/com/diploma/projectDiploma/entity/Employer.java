@@ -4,6 +4,8 @@ package com.diploma.projectDiploma.entity;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Set;
+
 @Data
 @Document("Employer")
 public class Employer {
@@ -21,5 +23,7 @@ public class Employer {
     private String address;
 
     private String password;
+
+    private Set<String> roles;
 
 }
