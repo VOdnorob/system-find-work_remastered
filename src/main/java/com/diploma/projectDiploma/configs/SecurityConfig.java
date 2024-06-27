@@ -23,14 +23,14 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/welcome/**", "/api/workers/**", "/api/employers/**").permitAll()
+                        .requestMatchers("/welcome/**", "/api/workers/**", "/api/employers/**", "/api/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
+                      //  .loginPage("/login")
                         .permitAll() // Дозволити всім доступ до форми входу
                         .defaultSuccessUrl("/welcome/logged", true) // Куди перенаправляти після успішного входу
-                        .failureUrl("/login?error=true") // Куди перенаправляти при помилці входу
+                        .failureUrl("/welcome/noLogin") // Куди перенаправляти при помилці входу
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

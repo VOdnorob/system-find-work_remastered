@@ -13,4 +13,9 @@ public class LoginController {
     public String home(){
         return "Only logged in";
     }
+
+    @GetMapping("/noLogin")
+    public String noLogin(){
+        return "You are not logged in";
+    }
 }
